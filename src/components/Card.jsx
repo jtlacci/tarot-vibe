@@ -72,7 +72,15 @@ const Card = ({ card, isFlipped, onClick }) => {
     msBackfaceVisibility: 'hidden',
     borderRadius: '1rem',
     backgroundColor: '#7c3aed',
-    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+    border: '3px solid #FFD700',
+    boxShadow: `
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06),
+      0 0 20px rgba(255, 215, 0, 0.4),
+      inset 0 0 15px rgba(255, 215, 0, 0.3)
+    `,
+    animation: 'cardGlow 2s ease-in-out infinite alternate',
+    overflow: 'hidden'
   };
 
   const frontStyle = {
@@ -90,8 +98,34 @@ const Card = ({ card, isFlipped, onClick }) => {
     alignItems: 'center',
     justifyContent: 'center',
     background: 'linear-gradient(to bottom right, #f5f3ff, #ede9fe)',
-    borderRadius: '1rem'
+    borderRadius: 'calc(1rem - 3px)'
   };
+
+  const keyframes = `
+    @keyframes cardGlow {
+      from {
+        box-shadow: 
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06),
+          0 0 20px rgba(255, 215, 0, 0.4),
+          inset 0 0 15px rgba(255, 215, 0, 0.3);
+      }
+      to {
+        box-shadow: 
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06),
+          0 0 30px rgba(255, 215, 0, 0.6),
+          inset 0 0 20px rgba(255, 215, 0, 0.4);
+      }
+    }
+  `;
+
+  React.useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = keyframes;
+    document.head.appendChild(style);
+    return () => document.head.removeChild(style);
+  }, []);
 
   return (
     <motion.div
@@ -111,10 +145,63 @@ const Card = ({ card, isFlipped, onClick }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '2rem'
+            padding: '2rem',
+            borderRadius: 'calc(1rem - 3px)',
+            overflow: 'hidden',
+            background: 'linear-gradient(45deg, #6d28d9, #7c3aed, #8b5cf6)'
           }}>
-            <svg viewBox="0 0 40 100" width="40" height="100" style={{opacity: 0.3}}>
-              <ellipse cx="20" cy="50" rx="15" ry="45" stroke="white" fill="none" strokeWidth="1"/>
+            <svg viewBox="0 0 100 160" width="100%" height="100%" style={{opacity: 0.25, position: 'absolute'}}>
+              {/* Main mandala structure */}
+              <circle cx="50" cy="80" r="35" stroke="white" fill="none" strokeWidth="0.5"/>
+              <circle cx="50" cy="80" r="25" stroke="white" fill="none" strokeWidth="0.5"/>
+              <circle cx="50" cy="80" r="15" stroke="white" fill="none" strokeWidth="0.5"/>
+              <circle cx="50" cy="80" r="5" stroke="white" fill="none" strokeWidth="0.5"/>
+              
+              {/* Decorative rays */}
+              {[...Array(16)].map((_, i) => (
+                <line
+                  key={i}
+                  x1="50"
+                  y1="80"
+                  x2={50 + 45 * Math.cos((i * Math.PI) / 8)}
+                  y2={80 + 45 * Math.sin((i * Math.PI) / 8)}
+                  stroke="white"
+                  strokeWidth="0.5"
+                />
+              ))}
+              
+              {/* Top and bottom symbols */}
+              <circle cx="50" cy="25" r="12" stroke="white" fill="none" strokeWidth="0.5"/>
+              <circle cx="50" cy="25" r="8" stroke="white" fill="none" strokeWidth="0.5"/>
+              <circle cx="50" cy="25" r="4" stroke="white" fill="none" strokeWidth="0.5"/>
+              
+              <circle cx="50" cy="135" r="12" stroke="white" fill="none" strokeWidth="0.5"/>
+              <circle cx="50" cy="135" r="8" stroke="white" fill="none" strokeWidth="0.5"/>
+              <circle cx="50" cy="135" r="4" stroke="white" fill="none" strokeWidth="0.5"/>
+              
+              {/* Small decorative dots */}
+              <circle cx="50" cy="25" r="2" fill="white"/>
+              <circle cx="50" cy="135" r="2" fill="white"/>
+              
+              {/* Corner flourishes */}
+              {/* Top left */}
+              <path d="M20 20 Q35 20 35 35" stroke="white" fill="none" strokeWidth="0.5"/>
+              <path d="M25 25 Q35 25 35 35" stroke="white" fill="none" strokeWidth="0.5"/>
+              {/* Top right */}
+              <path d="M80 20 Q65 20 65 35" stroke="white" fill="none" strokeWidth="0.5"/>
+              <path d="M75 25 Q65 25 65 35" stroke="white" fill="none" strokeWidth="0.5"/>
+              {/* Bottom left */}
+              <path d="M20 140 Q35 140 35 125" stroke="white" fill="none" strokeWidth="0.5"/>
+              <path d="M25 135 Q35 135 35 125" stroke="white" fill="none" strokeWidth="0.5"/>
+              {/* Bottom right */}
+              <path d="M80 140 Q65 140 65 125" stroke="white" fill="none" strokeWidth="0.5"/>
+              <path d="M75 135 Q65 135 65 125" stroke="white" fill="none" strokeWidth="0.5"/>
+              
+              {/* Side decorative elements */}
+              <path d="M15 80 Q50 55 85 80" stroke="white" fill="none" strokeWidth="0.5"/>
+              <path d="M15 80 Q50 65 85 80" stroke="white" fill="none" strokeWidth="0.5"/>
+              <path d="M15 80 Q50 95 85 80" stroke="white" fill="none" strokeWidth="0.5"/>
+              <path d="M15 80 Q50 105 85 80" stroke="white" fill="none" strokeWidth="0.5"/>
             </svg>
           </div>
         </div>
