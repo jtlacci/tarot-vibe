@@ -30,8 +30,22 @@ function App() {
     fontSize: '3rem',
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: '3rem',
+    marginBottom: '0.5rem',
     background: 'linear-gradient(to right, #ede9fe, #8b5cf6)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent'
+  };
+
+  const subtitleStyle = {
+    fontSize: '1.5rem',
+    textAlign: 'center',
+    marginBottom: '3rem',
+    color: '#a78bfa',
+    fontStyle: 'italic',
+    letterSpacing: '0.05em',
+    opacity: 0.9,
+    textShadow: '0 0 10px rgba(167, 139, 250, 0.3)',
+    background: 'linear-gradient(to right, #a78bfa, #c4b5fd)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent'
   };
@@ -66,13 +80,25 @@ function App() {
         >
           Tarot Vibe
         </motion.h1>
+        <motion.h2 
+          style={subtitleStyle}
+          initial={{ y: -20, opacity: 0, scale: 0.95 }}
+          animate={{ y: 0, opacity: 0.9, scale: 1 }}
+          transition={{ 
+            delay: 0.3, 
+            duration: 0.8,
+            ease: [0.34, 1.56, 0.64, 1]
+          }}
+        >
+          The Saturn-Neptune Convergence
+        </motion.h2>
 
         {!isReading ? (
           <motion.div 
             style={{ padding: '3rem 0', display: 'flex', justifyContent: 'center' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.6 }}
           >
             <button
               onClick={() => setIsReading(true)}

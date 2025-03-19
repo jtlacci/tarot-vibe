@@ -3,54 +3,189 @@ import React from 'react';
 
 const getCardPattern = (id) => {
   const patterns = {
-    0: ( // The Fool - Spiraling path representing the journey
+    0: ( // The Fool
       <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
-        <path d="M50 10 Q80 40 50 80 Q20 120 50 150" stroke="#7c3aed" fill="none" strokeWidth="2"/>
-        <path d="M30 10 Q60 40 30 80 Q0 120 30 150" stroke="#7c3aed" fill="none" strokeWidth="1"/>
-        <path d="M70 10 Q100 40 70 80 Q40 120 70 150" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <path d="M30 140 C50 140 50 20 70 20" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <circle cx="75" cy="15" r="3" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <path d="M65 25 C65 25 68 22 71 25" stroke="#7c3aed" fill="none" strokeWidth="1"/>
       </svg>
     ),
-    1: ( // The Magician - Intersecting circles representing manifestation
+    1: ( // The Magician
       <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
-        <circle cx="50" cy="80" r="40" stroke="#7c3aed" fill="none" strokeWidth="2"/>
-        <circle cx="30" cy="60" r="30" stroke="#7c3aed" fill="none" strokeWidth="1"/>
-        <circle cx="70" cy="60" r="30" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <path d="M30 100 L70 100" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M50 80 L50 120" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M35 60 C50 40 50 40 65 60" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+        <path d="M40 40 L60 40" stroke="#7c3aed" fill="none" strokeWidth="1"/>
       </svg>
     ),
-    2: ( // The High Priestess - Moon phases
+    2: ( // The High Priestess
       <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
-        <circle cx="50" cy="40" r="20" stroke="#7c3aed" fill="none" strokeWidth="2"/>
-        <path d="M30 80 A20 20 0 0 1 30 120" stroke="#7c3aed" fill="none" strokeWidth="2"/>
-        <circle cx="70" cy="100" r="15" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <path d="M30 40 L30 120" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M70 40 L70 120" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M35 60 C50 60 50 60 65 60" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <path d="M40 30 A10 10 0 0 1 60 30" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
       </svg>
     ),
-    3: ( // The Empress - Flowing vines and flowers
+    3: ( // The Empress
       <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
-        <path d="M10 80 Q50 40 90 80" stroke="#7c3aed" fill="none" strokeWidth="2"/>
-        <path d="M10 100 Q50 60 90 100" stroke="#7c3aed" fill="none" strokeWidth="1"/>
-        <circle cx="50" cy="60" r="5" stroke="#7c3aed" fill="none" strokeWidth="1"/>
-        <circle cx="30" cy="80" r="5" stroke="#7c3aed" fill="none" strokeWidth="1"/>
-        <circle cx="70" cy="80" r="5" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <path d="M50 30 C70 30 70 80 50 80 C30 80 30 130 50 130" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <circle cx="45" cy="90" r="3" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <circle cx="55" cy="70" r="3" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <circle cx="45" cy="50" r="3" stroke="#7c3aed" fill="none" strokeWidth="1"/>
       </svg>
     ),
-    4: ( // The Emperor - Strong geometric patterns
+    4: ( // The Emperor
       <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
-        <rect x="30" y="40" width="40" height="40" stroke="#7c3aed" fill="none" strokeWidth="2"/>
-        <rect x="20" y="80" width="60" height="60" stroke="#7c3aed" fill="none" strokeWidth="1"/>
-        <line x1="50" y1="20" x2="50" y2="140" stroke="#7c3aed" strokeWidth="1"/>
-        <line x1="20" y1="80" x2="80" y2="80" stroke="#7c3aed" strokeWidth="1"/>
+        <rect x="35" y="40" width="30" height="80" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M35 50 L50 30 L65 50" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M40 60 L60 60" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <path d="M40 80 L60 80" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+      </svg>
+    ),
+    5: ( // The Hierophant
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <path d="M35 40 L65 40" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M50 40 L50 120" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <circle cx="35" cy="120" r="5" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <circle cx="50" cy="120" r="5" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <circle cx="65" cy="120" r="5" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+      </svg>
+    ),
+    6: ( // The Lovers
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <path d="M35 80 C35 60 65 60 65 80" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <circle cx="35" cy="100" r="15" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+        <circle cx="65" cy="100" r="15" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+        <circle cx="50" cy="40" r="10" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+      </svg>
+    ),
+    7: ( // The Chariot
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <path d="M30 100 L70 100 L60 60 L40 60 Z" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <circle cx="35" cy="110" r="8" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+        <circle cx="65" cy="110" r="8" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+      </svg>
+    ),
+    8: ( // Strength
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <path d="M40 80 C45 70 55 70 60 80" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M35 90 C50 90 50 90 65 90" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+        <path d="M40 60 C50 40 50 40 60 60" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+      </svg>
+    ),
+    9: ( // The Hermit
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <path d="M50 40 L50 120" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <circle cx="50" cy="30" r="8" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+        <path d="M40 120 L60 120" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+      </svg>
+    ),
+    10: ( // Wheel of Fortune
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <circle cx="50" cy="80" r="30" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M50 50 L50 110" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <path d="M30 80 L70 80" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <path d="M35 65 L65 95" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <path d="M35 95 L65 65" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+      </svg>
+    ),
+    11: ( // Justice
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <path d="M30 60 L70 60" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M50 60 L50 120" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M35 50 L65 50" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <path d="M45 40 L55 40" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+      </svg>
+    ),
+    12: ( // The Hanged Man
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <path d="M30 40 L70 40" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M50 40 L50 80" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M35 100 C50 80 50 80 65 100" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+      </svg>
+    ),
+    13: ( // Death
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <path d="M40 60 C50 60 50 100 60 100" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <circle cx="50" cy="80" r="20" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+        <path d="M45 75 C50 70 50 90 55 85" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+      </svg>
+    ),
+    14: ( // Temperance
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <path d="M40 60 C50 80 50 80 60 100" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M60 60 C50 80 50 80 40 100" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+      </svg>
+    ),
+    15: ( // The Devil
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <path d="M50 40 L50 120" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M35 60 L65 60" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+        <path d="M35 100 L65 100" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+        <path d="M30 80 L70 80" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+      </svg>
+    ),
+    16: ( // The Tower
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <path d="M40 120 L40 40 L60 40 L60 120" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M30 30 L70 30" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+        <path d="M35 50 L65 90" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+      </svg>
+    ),
+    17: ( // The Star
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <circle cx="50" cy="80" r="5" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <circle cx="30" cy="60" r="3" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <circle cx="70" cy="60" r="3" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <circle cx="30" cy="100" r="3" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <circle cx="70" cy="100" r="3" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <circle cx="50" cy="40" r="3" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+        <circle cx="50" cy="120" r="3" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+      </svg>
+    ),
+    18: ( // The Moon
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <path d="M35 40 A15 15 0 0 0 65 40" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M30 120 C50 100 50 100 70 120" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+      </svg>
+    ),
+    19: ( // The Sun
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <circle cx="50" cy="80" r="20" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M50 50 L50 110" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+        <path d="M30 80 L70 80" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+        <path d="M35 65 L65 95" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+        <path d="M35 95 L65 65" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+      </svg>
+    ),
+    20: ( // Judgment
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <path d="M40 100 C50 60 50 60 60 100" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M35 40 C50 30 50 30 65 40" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+        <path d="M30 50 C50 40 50 40 70 50" stroke="#7c3aed" fill="none" strokeWidth="1"/>
+      </svg>
+    ),
+    21: ( // The World
+      <svg width="100%" height="100%" viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg" style={{position: 'absolute', opacity: 0.1}}>
+        <circle cx="50" cy="80" r="30" stroke="#7c3aed" fill="none" strokeWidth="2"/>
+        <path d="M50 50 L50 110" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+        <path d="M30 80 L70 80" stroke="#7c3aed" fill="none" strokeWidth="1.5"/>
+        <circle cx="50" cy="80" r="15" stroke="#7c3aed" fill="none" strokeWidth="1"/>
       </svg>
     )
   };
   return patterns[id] || patterns[0];
 };
 
-const Card = ({ card, isFlipped, onClick }) => {
+const Card = ({ card, isFlipped, onClick, index }) => {
   const cardStyle = {
     perspective: '1000px',
     width: '12rem',
     height: '20rem',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    animation: `float 8s ease-in-out infinite`,
+    animationDelay: `${(index || 0) * 0.2}s`,
+    transform: `translateY(${Math.random() * 2}px)`, // Reduced random initial position
   };
 
   const innerStyle = {
@@ -58,7 +193,7 @@ const Card = ({ card, isFlipped, onClick }) => {
     width: '100%',
     height: '100%',
     transformStyle: 'preserve-3d',
-    transition: 'transform 0.6s',
+    transition: 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
     transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
   };
 
@@ -70,9 +205,8 @@ const Card = ({ card, isFlipped, onClick }) => {
     WebkitBackfaceVisibility: 'hidden',
     MozBackfaceVisibility: 'hidden',
     msBackfaceVisibility: 'hidden',
-    borderRadius: '1rem',
-    backgroundColor: '#7c3aed',
     border: '3px solid #FFD700',
+    borderRadius: '1rem',
     boxShadow: `
       0 4px 6px -1px rgba(0, 0, 0, 0.1),
       0 2px 4px -1px rgba(0, 0, 0, 0.06),
@@ -92,16 +226,60 @@ const Card = ({ card, isFlipped, onClick }) => {
   const contentStyle = {
     position: 'absolute',
     inset: 0,
-    padding: '1rem',
+    padding: '1.5rem',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     background: 'linear-gradient(to bottom right, #f5f3ff, #ede9fe)',
-    borderRadius: 'calc(1rem - 3px)'
+    borderRadius: 'calc(1rem - 3px)',
+    color: '#1f2937'
+  };
+
+  const nameStyle = {
+    fontSize: '1.25rem',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: '0.5rem',
+    color: '#4c1d95'
+  };
+
+  const predictionStyle = {
+    fontSize: '1rem',
+    textAlign: 'center',
+    lineHeight: '1.4',
+    fontStyle: 'italic',
+    color: '#4c1d95',
+    marginTop: 'auto'
+  };
+
+  const logoStyle = {
+    flex: 1,
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '1rem 0'
   };
 
   const keyframes = `
+    @keyframes float {
+      0% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      25% {
+        transform: translateY(-2px) rotate(0.25deg);
+      }
+      50% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      75% {
+        transform: translateY(2px) rotate(-0.25deg);
+      }
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+    }
     @keyframes cardGlow {
       from {
         box-shadow: 
@@ -148,9 +326,50 @@ const Card = ({ card, isFlipped, onClick }) => {
             padding: '2rem',
             borderRadius: 'calc(1rem - 3px)',
             overflow: 'hidden',
-            background: 'linear-gradient(45deg, #6d28d9, #7c3aed, #8b5cf6)'
+            background: `
+              repeating-linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.03) 0px,
+                rgba(255, 255, 255, 0.03) 1px,
+                transparent 1px,
+                transparent 3px
+              ),
+              radial-gradient(circle at 50% 50%, 
+                rgba(255, 255, 255, 0.12) 0%, 
+                rgba(255, 255, 255, 0.04) 25%, 
+                rgba(255, 255, 255, 0) 50%),
+              radial-gradient(circle at 85% 15%, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                rgba(255, 255, 255, 0) 50%),
+              radial-gradient(circle at 15% 85%, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                rgba(255, 255, 255, 0) 50%),
+              linear-gradient(45deg, #6d28d9, #7c3aed, #8b5cf6)
+            `,
+            boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.15)'
           }}>
-            <svg viewBox="0 0 100 160" width="100%" height="100%" style={{opacity: 0.25, position: 'absolute'}}>
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              background: `
+                linear-gradient(to bottom, 
+                  rgba(0,0,0,0.1) 0%, 
+                  rgba(0,0,0,0) 15%, 
+                  rgba(0,0,0,0) 85%, 
+                  rgba(0,0,0,0.1) 100%
+                ),
+                linear-gradient(to right, 
+                  rgba(0,0,0,0.1) 0%, 
+                  rgba(0,0,0,0) 15%, 
+                  rgba(0,0,0,0) 85%, 
+                  rgba(0,0,0,0.1) 100%
+                )
+              `
+            }} />
+            <svg viewBox="0 0 100 160" width="100%" height="100%" style={{opacity: 0.2, position: 'absolute'}}>
               {/* Main mandala structure */}
               <circle cx="50" cy="80" r="35" stroke="white" fill="none" strokeWidth="0.5"/>
               <circle cx="50" cy="80" r="25" stroke="white" fill="none" strokeWidth="0.5"/>
@@ -209,25 +428,11 @@ const Card = ({ card, isFlipped, onClick }) => {
         {/* Card Front */}
         <div style={frontStyle}>
           <div style={contentStyle}>
-            {getCardPattern(card?.id)}
-            <h3 style={{
-              color: '#2e1065',
-              fontSize: '1.125rem',
-              fontWeight: 600,
-              marginBottom: '1rem',
-              textAlign: 'center'
-            }}>
-              {card?.name || 'Unknown Card'}
-            </h3>
-            {card?.meaning && (
-              <p style={{
-                color: '#7c3aed',
-                fontSize: '0.875rem',
-                textAlign: 'center'
-              }}>
-                {card.meaning.upright}
-              </p>
-            )}
+            <div style={nameStyle}>{card.name}</div>
+            <div style={logoStyle}>
+              {getCardPattern(card.id)}
+            </div>
+            <div style={predictionStyle}>{card.prediction}</div>
           </div>
         </div>
       </div>
