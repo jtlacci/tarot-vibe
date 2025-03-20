@@ -93,7 +93,7 @@ const getCardPattern = (suit, value) => {
   );
 };
 
-const Card = ({ card, isFlipped, index }) => {
+const Card = ({ card, isFlipped, index, isSelected, onSelect }) => {
   const cardStyle = {
     position: "relative",
     width: "160px",
@@ -170,9 +170,24 @@ const Card = ({ card, isFlipped, index }) => {
     <motion.div
       style={cardStyle}
       initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      whileHover={{ y: -10 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      animate={{
+        scale: card.isDiscarded ? 0 : 1,
+        y: isSelected ? -60 : 0,
+        opacity: card.isDiscarded ? 0 : 1,
+      }}
+      whileHover={{ y: isSelected ? -65 : -10 }}
+      transition={{
+        type: "spring",
+        stiffness: 300,
+        damping: 20,
+        scale: {
+          duration: 0.3,
+        },
+        opacity: {
+          duration: 0.3,
+        },
+      }}
+      onClick={onSelect}
     >
       <div style={innerStyle}>
         {/* Card Back */}
