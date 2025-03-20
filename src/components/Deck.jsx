@@ -1,11 +1,13 @@
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
+import { evaluateHand } from "../data/hands";
 
 const Deck = ({ cards: initialCards = [], onScoreChange }) => {
   const [cards, setCards] = useState([]);
   const [drawnCards, setDrawnCards] = useState([]);
   const [selectedCards, setSelectedCards] = useState(new Set());
+  const [lastPlayedHand, setLastPlayedHand] = useState(null);
 
   useEffect(() => {
     setCards(initialCards);
@@ -85,15 +87,25 @@ const Deck = ({ cards: initialCards = [], onScoreChange }) => {
   const handlePlayHand = () => {
     if (selectedCards.size === 0 || cards.length < selectedCards.size) return;
 
-    // Calculate score based on selected cards
+    // Get selected cards for scoring
     const selectedCardsArray = Array.from(selectedCards);
-    const scoreToAdd = selectedCardsArray.reduce((total, index) => {
-      const card = drawnCards[index];
-      return total + (card.value || 1);
-    }, 0);
+    const cardsToScore = selectedCardsArray.map(index => drawnCards[index]);
     
-    // Update score
-    onScoreChange?.(scoreToAdd);
+    // Evaluate the hand and calculate score
+    const result = evaluateHand(cardsToScore);
+    if (result) {
+      onScoreChange?.(result.score);
+      setLastPlayedHand({
+        name: result.hand.name,
+        score: result.score,
+        description: result.hand.description
+      });
+
+      // Clear last played hand after 3 seconds
+      setTimeout(() => {
+        setLastPlayedHand(null);
+      }, 3000);
+    }
 
     // First mark selected cards as played
     setDrawnCards((currentCards) =>
@@ -188,6 +200,23 @@ const Deck = ({ cards: initialCards = [], onScoreChange }) => {
     marginTop: "2rem",
   };
 
+  const handInfoStyle = {
+    position: "absolute",
+    top: "-60px",
+    left: "50%",
+    transform: "translateX(-50%)",
+    background: "linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)",
+    padding: "1rem 2.5rem",
+    borderRadius: "12px",
+    color: "white",
+    textAlign: "center",
+    boxShadow: "0 0 25px rgba(124, 58, 237, 0.6), inset 0 0 0 2px rgba(255, 255, 255, 0.15)",
+    zIndex: 10,
+    minWidth: "400px",
+    maxWidth: "600px",
+    width: "80%"
+  };
+
   // Animation variants for the floating cards
   const floatingCardVariants = {
     initial: {
@@ -253,6 +282,24 @@ const Deck = ({ cards: initialCards = [], onScoreChange }) => {
       )}
 
       <div style={cardsContainerStyle}>
+        {lastPlayedHand && (
+          <motion.div
+            style={handInfoStyle}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+          >
+            <div style={{ fontSize: "1.25rem", fontWeight: "bold" }}>
+              {lastPlayedHand.name}
+            </div>
+            <div style={{ fontSize: "0.875rem", opacity: 0.9 }}>
+              {lastPlayedHand.description}
+            </div>
+            <div style={{ marginTop: "0.5rem", fontSize: "1.125rem" }}>
+              Score: {lastPlayedHand.score}
+            </div>
+          </motion.div>
+        )}
         {[0, 1, 2, 3, 4].map((index) => (
           <div key={`slot-${index}`} style={cardSlotStyle(index)}>
             <AnimatePresence mode="wait">

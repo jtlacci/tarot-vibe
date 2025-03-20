@@ -43,10 +43,30 @@ function App() {
     WebkitTextFillColor: "transparent",
   };
 
-  const scoreStyle = {
+  const scoreContainerStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    background: "linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)",
+    padding: "1rem 2rem",
+    borderRadius: "12px",
+    boxShadow: "0 0 25px rgba(124, 58, 237, 0.6), inset 0 0 0 2px rgba(255, 255, 255, 0.15)",
+  };
+
+  const scoreValueStyle = {
     fontSize: "3rem",
     fontWeight: "bold",
-    color: "#7c3aed",
+    color: "white",
+    textShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
+    fontFamily: "monospace"
+  };
+
+  const scoreLabelStyle = {
+    fontSize: "1rem",
+    color: "rgba(255, 255, 255, 0.9)",
+    textTransform: "uppercase",
+    letterSpacing: "0.1em",
+    marginTop: "0.25rem"
   };
 
   const buttonStyle = {
@@ -84,13 +104,31 @@ function App() {
           <AnimatePresence mode="popLayout">
             <motion.div
               key={score}
-              style={scoreStyle}
+              style={scoreContainerStyle}
               initial={{ scale: 1.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 15 }}
             >
-              {score}
+              <motion.div 
+                style={scoreValueStyle}
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  textShadow: [
+                    "0 2px 4px rgba(0, 0, 0, 0.3)",
+                    "0 0 20px rgba(124, 58, 237, 0.8)",
+                    "0 2px 4px rgba(0, 0, 0, 0.3)"
+                  ]
+                }}
+                transition={{
+                  duration: 0.5,
+                  times: [0, 0.5, 1],
+                  ease: "easeOut"
+                }}
+              >
+                {score.toLocaleString()}
+              </motion.div>
+              <div style={scoreLabelStyle}>SCORE</div>
             </motion.div>
           </AnimatePresence>
         </div>
