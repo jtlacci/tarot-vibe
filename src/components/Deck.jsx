@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
-const Deck = ({ cards: initialCards = [] }) => {
+const Deck = ({ cards: initialCards = [], onScoreChange }) => {
   const [cards, setCards] = useState([]);
   const [drawnCards, setDrawnCards] = useState([]);
   const [selectedCards, setSelectedCards] = useState(new Set());
@@ -12,7 +12,7 @@ const Deck = ({ cards: initialCards = [] }) => {
   }, [initialCards]);
 
   const handleCardSelect = (index) => {
-    setSelectedCards(prev => {
+    setSelectedCards((prev) => {
       const newSelected = new Set(prev);
       if (newSelected.has(index)) {
         newSelected.delete(index);
@@ -42,7 +42,9 @@ const Deck = ({ cards: initialCards = [] }) => {
 
     // Flip cards after 1 second delay
     setTimeout(() => {
-      setDrawnCards(cards => cards.map(card => ({ ...card, isFlipped: true })));
+      setDrawnCards((cards) =>
+        cards.map((card) => ({ ...card, isFlipped: true }))
+      );
     }, 1000);
   };
 
@@ -50,8 +52,8 @@ const Deck = ({ cards: initialCards = [] }) => {
     if (selectedCards.size === 0 || cards.length < selectedCards.size) return;
 
     // First mark selected cards as discarded
-    setDrawnCards(currentCards => 
-      currentCards.map((card, index) => 
+    setDrawnCards((currentCards) =>
+      currentCards.map((card, index) =>
         selectedCards.has(index) ? { ...card, isDiscarded: true } : card
       )
     );
@@ -60,8 +62,8 @@ const Deck = ({ cards: initialCards = [] }) => {
     setTimeout(() => {
       const newDrawnCards = [...drawnCards];
       const newIndices = new Set();
-      
-      selectedCards.forEach(index => {
+
+      selectedCards.forEach((index) => {
         const randomIndex = Math.floor(Math.random() * cards.length);
         newDrawnCards[index] = { ...cards[randomIndex], isFlipped: false };
         newIndices.add(randomIndex);
@@ -73,7 +75,53 @@ const Deck = ({ cards: initialCards = [] }) => {
 
       // Flip new cards after 1 second
       setTimeout(() => {
-        setDrawnCards(cards => cards.map(card => ({ ...card, isFlipped: true })));
+        setDrawnCards((cards) =>
+          cards.map((card) => ({ ...card, isFlipped: true }))
+        );
+      }, 1000);
+    }, 500);
+  };
+
+  const handlePlayHand = () => {
+    if (selectedCards.size === 0 || cards.length < selectedCards.size) return;
+
+    // Calculate score based on selected cards
+    const selectedCardsArray = Array.from(selectedCards);
+    const scoreToAdd = selectedCardsArray.reduce((total, index) => {
+      const card = drawnCards[index];
+      return total + (card.value || 1);
+    }, 0);
+    
+    // Update score
+    onScoreChange?.(scoreToAdd);
+
+    // First mark selected cards as played
+    setDrawnCards((currentCards) =>
+      currentCards.map((card, index) =>
+        selectedCards.has(index) ? { ...card, isDiscarded: true } : card
+      )
+    );
+
+    // After 500ms, replace played cards with new ones
+    setTimeout(() => {
+      const newDrawnCards = [...drawnCards];
+      const newIndices = new Set();
+
+      selectedCards.forEach((index) => {
+        const randomIndex = Math.floor(Math.random() * cards.length);
+        newDrawnCards[index] = { ...cards[randomIndex], isFlipped: false };
+        newIndices.add(randomIndex);
+      });
+
+      setCards(cards.filter((_, index) => !newIndices.has(index)));
+      setDrawnCards(newDrawnCards);
+      setSelectedCards(new Set());
+
+      // Flip new cards after 1 second
+      setTimeout(() => {
+        setDrawnCards((cards) =>
+          cards.map((card) => ({ ...card, isFlipped: true }))
+        );
       }, 1000);
     }, 500);
   };
@@ -82,8 +130,8 @@ const Deck = ({ cards: initialCards = [] }) => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: "2rem",
-    padding: "2rem",
+    gap: "1rem",
+    padding: "1rem",
   };
 
   const cardsContainerStyle = {
@@ -93,13 +141,13 @@ const Deck = ({ cards: initialCards = [] }) => {
     alignItems: "center",
     padding: "1rem",
     minHeight: "300px",
-    position: "relative"
+    position: "relative",
   };
 
   const cardSlotStyle = (index) => ({
     flex: "0 0 160px",
     height: "224px",
-    position: "relative"
+    position: "relative",
   });
 
   const buttonStyle = {
@@ -191,25 +239,21 @@ const Deck = ({ cards: initialCards = [] }) => {
   return (
     <div style={containerStyle}>
       {drawnCards.length < 5 && (
-        <>
-          <div style={{ marginBottom: "1rem", textAlign: "center" }}>
-            {cards.length} Cards Remaining
-          </div>
-          <button
-            style={{
-              ...drawButtonStyle,
-              opacity: cards.length < 5 ? 0.5 : 1,
-              cursor: cards.length < 5 ? "not-allowed" : "pointer",
-            }}
-            onClick={drawCard}
-            disabled={cards.length < 5}
-          >
-            Draw Cards
-          </button>
-        </>
+        <button
+          style={{
+            ...drawButtonStyle,
+            opacity: cards.length < 5 ? 0.5 : 1,
+            cursor: cards.length < 5 ? "not-allowed" : "pointer",
+          }}
+          onClick={drawCard}
+          disabled={cards.length < 5}
+        >
+          Draw Cards ({cards.length})
+        </button>
       )}
+
       <div style={cardsContainerStyle}>
-        {[0, 1, 2, 3, 4].map(index => (
+        {[0, 1, 2, 3, 4].map((index) => (
           <div key={`slot-${index}`} style={cardSlotStyle(index)}>
             <AnimatePresence mode="wait">
               {drawnCards[index] && (
@@ -222,7 +266,7 @@ const Deck = ({ cards: initialCards = [] }) => {
                   style={{
                     position: "absolute",
                     top: 0,
-                    left: 0
+                    left: 0,
                   }}
                 >
                   <Card
@@ -238,18 +282,32 @@ const Deck = ({ cards: initialCards = [] }) => {
           </div>
         ))}
       </div>
+
+      {drawnCards.length > 0 && (
+        <div
+          style={{
+            marginTop: "1rem",
+            textAlign: "center",
+            fontSize: "0.875rem",
+            color: "#6b7280",
+          }}
+        >
+          {cards.length} Cards Remaining
+        </div>
+      )}
       {drawnCards.length === 5 && (
         <div style={actionButtonsStyle}>
-          <button 
+          <button
             style={playButtonStyle}
+            onClick={handlePlayHand}
             disabled={selectedCards.size === 0}
           >
             Play Hand
           </button>
-          <button 
+          <button
             style={discardButtonStyle}
-            disabled={selectedCards.size === 0}
             onClick={handleDiscard}
+            disabled={selectedCards.size === 0}
           >
             Discard
           </button>

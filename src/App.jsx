@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Deck from "./components/Deck";
 import { playingCards } from "./data/cards";
 
 function App() {
   const [isReading, setIsReading] = useState(false);
+  const [score, setScore] = useState(0);
 
   const containerStyle = {
     minHeight: "100vh",
@@ -26,28 +27,26 @@ function App() {
     alignItems: "center",
   };
 
+  const titleContainerStyle = {
+    display: "flex",
+    alignItems: "center",
+    gap: "2rem",
+    marginBottom: "3rem",
+  };
+
   const titleStyle = {
     fontSize: "3rem",
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: "0.5rem",
     background: "linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
   };
 
-  const subtitleStyle = {
-    fontSize: "1.5rem",
-    textAlign: "center",
-    marginBottom: "3rem",
-    color: "#a78bfa",
-    fontStyle: "italic",
-    letterSpacing: "0.05em",
-    opacity: 0.9,
-    textShadow: "0 0 10px rgba(124, 58, 237, 0.3)",
-    background: "linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
+  const scoreStyle = {
+    fontSize: "3rem",
+    fontWeight: "bold",
+    color: "#7c3aed",
   };
 
   const buttonStyle = {
@@ -73,26 +72,28 @@ function App() {
   return (
     <div style={containerStyle}>
       <div style={contentStyle}>
-        <motion.h1
-          style={titleStyle}
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
-        >
-          Playing Cards
-        </motion.h1>
-        <motion.h2
-          style={subtitleStyle}
-          initial={{ y: -20, opacity: 0, scale: 0.95 }}
-          animate={{ y: 0, opacity: 0.9, scale: 1 }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: [0.34, 1.56, 0.64, 1],
-          }}
-        >
-          Classic Card Game
-        </motion.h2>
+        <div style={titleContainerStyle}>
+          <motion.h1
+            style={titleStyle}
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            TAROT BALATRO
+          </motion.h1>
+          <AnimatePresence mode="popLayout">
+            <motion.div
+              key={score}
+              style={scoreStyle}
+              initial={{ scale: 1.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            >
+              {score}
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
         {!isReading ? (
           <motion.div
@@ -125,7 +126,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Deck cards={playingCards} />
+            <Deck cards={playingCards} onScoreChange={(points) => setScore((prev) => prev + points)} />
           </motion.div>
         )}
       </div>
