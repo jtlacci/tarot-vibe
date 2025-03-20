@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Deck from './components/Deck'
-import { tarotCards } from './data/cards'
+import { playingCards } from './data/cards'
 
 function App() {
   const [isReading, setIsReading] = useState(false)
@@ -31,7 +31,7 @@ function App() {
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: '0.5rem',
-    background: 'linear-gradient(to right, #ede9fe, #8b5cf6)',
+    background: 'linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent'
   };
@@ -44,29 +44,28 @@ function App() {
     fontStyle: 'italic',
     letterSpacing: '0.05em',
     opacity: 0.9,
-    textShadow: '0 0 10px rgba(167, 139, 250, 0.3)',
-    background: 'linear-gradient(to right, #a78bfa, #c4b5fd)',
+    textShadow: '0 0 10px rgba(124, 58, 237, 0.3)',
+    background: 'linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent'
   };
 
   const buttonStyle = {
     padding: '1.5rem 3rem',
-    background: 'linear-gradient(to right, #7c3aed, #8b5cf6)',
-    borderRadius: '0.5rem',
+    background: 'linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)',
+    borderRadius: '12px',
     fontSize: '1.5rem',
     fontWeight: 600,
     color: 'white',
     transition: 'all 0.3s ease',
-    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+    boxShadow: '0 0 25px rgba(124, 58, 237, 0.6), inset 0 0 0 2px rgba(255, 255, 255, 0.15)',
     cursor: 'pointer',
     border: 'none'
   };
 
   const buttonHoverStyle = {
-    background: 'linear-gradient(to right, #8b5cf6, #9333ea)',
     transform: 'scale(1.05)',
-    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+    boxShadow: '0 0 35px rgba(124, 58, 237, 0.8), inset 0 0 0 2px rgba(255, 255, 255, 0.25)'
   };
 
   return (
@@ -78,7 +77,7 @@ function App() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6 }}
         >
-          Tarot Vibe
+          Playing Cards
         </motion.h1>
         <motion.h2 
           style={subtitleStyle}
@@ -90,7 +89,7 @@ function App() {
             ease: [0.34, 1.56, 0.64, 1]
           }}
         >
-          The Saturn-Neptune Convergence
+          Classic Card Game
         </motion.h2>
 
         {!isReading ? (
@@ -110,7 +109,7 @@ function App() {
                 Object.assign(e.target.style, buttonStyle);
               }}
             >
-              Begin Reading
+              Start Game
             </button>
           </motion.div>
         ) : (
@@ -120,7 +119,7 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Deck cards={tarotCards} />
+            <Deck cards={playingCards} />
           </motion.div>
         )}
       </div>
