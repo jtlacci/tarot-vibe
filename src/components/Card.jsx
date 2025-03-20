@@ -93,7 +93,7 @@ const getCardPattern = (suit, value) => {
   );
 };
 
-const Card = ({ card, isFlipped, onClick, index }) => {
+const Card = ({ card, isFlipped, index }) => {
   const cardStyle = {
     position: "relative",
     width: "160px",
@@ -169,7 +169,6 @@ const Card = ({ card, isFlipped, onClick, index }) => {
   return (
     <motion.div
       style={cardStyle}
-      onClick={onClick}
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}
       whileHover={{ y: -10 }}
